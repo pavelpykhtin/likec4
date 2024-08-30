@@ -8,7 +8,7 @@ import type {
   RelationshipArrowType,
   RelationshipLineType,
   Tag,
-  ThemeColor
+  Color
 } from '@likec4/core'
 import {
   ancestorsFqn,
@@ -38,7 +38,7 @@ export namespace DynamicViewComputeCtx {
     title: string | null
     description?: string
     technology?: string
-    color?: ThemeColor
+    color?: Color
     line?: RelationshipLineType
     head?: RelationshipArrowType
     tail?: RelationshipArrowType

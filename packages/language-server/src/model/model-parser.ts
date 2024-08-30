@@ -393,7 +393,7 @@ export class LikeC4ModelParser {
         }
         if (ast.isColorProperty(prop)) {
           if (isDefined(prop.value)) {
-            acc.custom[prop.key] = prop.value
+            acc.custom[prop.key] = prop.value as c4.Color
           }
           return acc
         }
@@ -494,7 +494,7 @@ export class LikeC4ModelParser {
         }
         if (ast.isColorProperty(prop)) {
           if (isTruthy(prop.value)) {
-            acc.customRelation[prop.key] = prop.value
+            acc.customRelation[prop.key] = prop.value as c4.Color
           }
           return acc
         }
@@ -632,7 +632,7 @@ export class LikeC4ModelParser {
             continue
           }
           if (ast.isColorProperty(prop)) {
-            step[prop.key] = prop.value
+            step[prop.key] = prop.value as c4.Color
             continue
           }
           if (ast.isLineProperty(prop)) {

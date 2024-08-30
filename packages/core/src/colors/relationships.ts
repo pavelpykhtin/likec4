@@ -1,4 +1,5 @@
-import type { RelationshipThemeColors, RelationshipThemeColorValues } from '../types/theme'
+import { generate } from '@ant-design/colors'
+import type { Color, HexColorLiteral, RelationshipThemeColors, RelationshipThemeColorValues } from '../types/theme'
 
 const gray = {
   lineColor: '#6E6E6E',
@@ -52,3 +53,24 @@ export const RelationshipColors = {
   sky,
   slate
 } satisfies RelationshipThemeColors
+
+export function deriveColor(source: HexColorLiteral, themeColorValue: keyof RelationshipThemeColorValues): HexColorLiteral {
+  const colors = generate(source);
+
+  switch (themeColorValue) {
+    case 'lineColor':
+      return source
+    case 'labelColor':
+      return colors[4] as HexColorLiteral
+    case 'labelBgColor':
+      return colors[9] as HexColorLiteral
+  }
+}
+
+export function relationshipColorValueProvider(color: Color, colorVariation: keyof RelationshipThemeColorValues): HexColorLiteral {
+  if(color.startsWith('#')) {
+    return deriveColor(color as HexColorLiteral, colorVariation);
+  } else {
+    return RelationshipColors[color as keyof RelationshipThemeColors][colorVariation];
+  }
+}

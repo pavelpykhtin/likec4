@@ -1,4 +1,6 @@
-import type { ElementThemeColors, ElementThemeColorValues } from '../types/theme'
+import type { Color, ElementThemeColors, ElementThemeColorValues, HexColorLiteral } from '../types/theme'
+import { generate } from '@ant-design/colors'
+import { rootLogger } from '@likec4/log'
 
 const blue = {
   fill: '#3b82f6',
@@ -78,3 +80,41 @@ export const ElementColors = {
     loContrast: '#c7d2fe'
   }
 } as const satisfies ElementThemeColors
+
+export function deriveColor(source: HexColorLiteral, themeColorValue: keyof ElementThemeColorValues): HexColorLiteral {
+  const colors = generate(source);
+
+  switch (themeColorValue) {
+    case 'fill':
+      return source
+    case 'stroke':
+      return colors[6] as HexColorLiteral
+    case 'hiContrast':
+      return colors[1] as HexColorLiteral
+    case 'loContrast':
+      return colors[2] as HexColorLiteral
+  }
+}
+const logger = rootLogger.withTag('elementNode');
+
+export function elementColorValueProvider(color: Color, colorVariation: keyof ElementThemeColorValues): HexColorLiteral {
+  if(color.startsWith('#')) {
+    return deriveColor(color as HexColorLiteral, colorVariation);
+  } else {
+    return ElementColors[color as keyof ElementThemeColors][colorVariation];
+  }
+}
+
+export function elementCustomPaletteProvider(color: HexColorLiteral): ElementThemeColorValues {
+  let colorValue: keyof ElementThemeColorValues;
+
+  logger.debug(color);
+
+  const result = {} as ElementThemeColorValues;
+
+  for(colorValue in blue) {
+    result[colorValue] = deriveColor(color, colorValue);
+  }
+
+  return result;
+}

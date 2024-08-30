@@ -1,6 +1,6 @@
 import type { LikeC4Theme } from '../types/theme'
-import { ElementColors } from './element'
-import { RelationshipColors } from './relationships'
+import { ElementColors, elementColorValueProvider } from './element'
+import { RelationshipColors, relationshipColorValueProvider } from './relationships'
 
 export const defaultTheme = {
   elements: ElementColors,
@@ -9,4 +9,9 @@ export const defaultTheme = {
   shadow: '#0a0a0a'
 } satisfies LikeC4Theme
 
-export { ElementColors, RelationshipColors }
+export { 
+  ElementColors, 
+  RelationshipColors,
+  elementColorValueProvider,
+  relationshipColorValueProvider
+}

@@ -102,6 +102,19 @@ describe.concurrent('model', () => {
       }
       user2 = person
     }`
+    test('element with custom color').valid`
+    specification {
+      element person
+      tag abcabc
+    }
+    model {
+      person user1 {
+        #abcabc
+        style {
+          color #00ff00
+        }
+      }
+    }`
 
   test('element with tags').valid`
     specification {

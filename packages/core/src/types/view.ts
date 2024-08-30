@@ -4,7 +4,7 @@ import type { ElementKind, ElementShape, ElementStyle, Fqn, Link, Tag } from './
 import type { ElementExpression, ElementPredicateExpression, Expression } from './expression'
 import type { Opaque } from './opaque'
 import type { RelationID, RelationshipArrowType, RelationshipKind, RelationshipLineType } from './relation'
-import type { ThemeColor } from './theme'
+import type { Color } from './theme'
 import type { ElementNotation } from './view-notation'
 
 // Full-qualified-name
@@ -30,7 +30,7 @@ export interface ViewRuleStyle {
   targets: ElementExpression[]
   notation?: string
   style: ElementStyle & {
-    color?: ThemeColor
+    color?: Color
     shape?: ElementShape
     icon?: IconUrl
   }
@@ -98,7 +98,7 @@ export interface DynamicViewStep {
   readonly description?: string
   readonly technology?: string
   readonly notation?: string
-  readonly color?: ThemeColor
+  readonly color?: Color
   readonly line?: RelationshipLineType
   readonly head?: RelationshipArrowType
   readonly tail?: RelationshipArrowType
@@ -175,7 +175,7 @@ export interface ComputedNode {
   /**
    * @deprecated Use `style` instead
    */
-  color: ThemeColor
+  color: Color
   /**
    * @deprecated Use `style` instead
    */
@@ -201,7 +201,7 @@ export interface ComputedEdge {
   technology?: string
   relations: RelationID[]
   kind?: RelationshipKind
-  color?: ThemeColor
+  color?: Color
   line?: RelationshipLineType
   head?: RelationshipArrowType
   tail?: RelationshipArrowType

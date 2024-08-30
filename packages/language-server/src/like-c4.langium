@@ -178,7 +178,7 @@ MetadataBody: '{'
 ;
 
 MetadataAttribute:
-  key=IdTerminal value=String
+  key=Id value=String
 ;
 
 // Views -------------------------------------
@@ -449,7 +449,7 @@ NavigateToProperty:
 LinkProperty:
   key='link' ':'? value=Uri title=String? ';'?;
 ColorProperty:
-  key='color' ':'? value=ThemeColor ';'?;
+  key='color' ':'? value=(ThemeColor | CustomColor) ';'?;
 
 OpacityProperty:
   key='opacity' ':'? value=Percent ';'?;
@@ -514,6 +514,9 @@ ThemeColor returns string:
   'primary' | 'secondary' | 'muted' | 'slate' | 'blue' | 'indigo' | 'sky' | 'red' | 'gray' | 'green' | 'amber';
 ElementShape returns string:
   'rectangle' | 'person' | 'browser' | 'mobile' | 'cylinder' | 'storage' | 'queue';
+
+CustomColor returns string:
+  Hash (Id | Hex);
 
 IconId returns string:
   LIB_ICON;
@@ -582,3 +585,4 @@ terminal String: /"[^"]*"|'[^']*'/;
 // terminal  TagId: HASH LETTER (LETTER | DIGIT | UNDERSCORE | DASH)*;
 // terminal IdTerminal: (LETTER | UNDERSCORE+ (LETTER | DIGIT)) (LETTER | DIGIT | UNDERSCORE | DASH)*;
 terminal IdTerminal:  /[_]*[a-zA-Z][-\w]*/;
+terminal Hex: /[a-zA-Z0-9]+/;

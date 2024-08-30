@@ -1,5 +1,5 @@
 import type { ComputedEdge, ComputedElementView, ComputedNode, Fqn } from '@likec4/core'
-import { DefaultArrowType, defaultTheme as Theme, nonNullable } from '@likec4/core'
+import { DefaultArrowType, defaultTheme as Theme, nonNullable, relationshipColorValueProvider as colorValueProvider } from '@likec4/core'
 import { chunk, difference, filter, first, intersection, isNonNullish, isTruthy, last, map, pipe, unique } from 'remeda'
 import type { EdgeModel, NodeModel, RootGraphModel } from 'ts-graphviz'
 import { attribute as _ } from 'ts-graphviz'
@@ -116,8 +116,8 @@ export class ElementViewPrinter extends DotPrinter<ComputedElementView> {
     }
     if (edge.color) {
       e.attributes.apply({
-        [_.color]: Theme.relationships[edge.color].lineColor,
-        [_.fontcolor]: Theme.relationships[edge.color].labelColor
+        [_.color]: colorValueProvider(edge.color, 'lineColor'),
+        [_.fontcolor]: colorValueProvider(edge.color, 'labelColor')
       })
     }
 

@@ -61,6 +61,13 @@ views {
       *
   }
 
+  /**
+   * @likec4-generated(v1)
+   * iKRoYXNo2ShhZDQxMWYyOWNlMWMxYjVlNTllZDYzYzQ4NGIxZjFkOWIyN2Q4OGIwqmF1dG9MYXlvdXSiVEKheAChefOld2lkdGjNAo2maGVpZ2h0zQMzpW5vZGVzg7FjbG91ZC5zdXBwb3J0VXNlcoKhYpTMqvPNAUDMtKFjwqhjdXN0b21lcoKhYpQAzQE5zQFAzLSh
+   * Y8KoY2xvdWQudWmCoWKUzLTNAnLNAUDMtKFjwqVlZGdlc4O6Y2xvdWQuc3VwcG9ydFVzZXI6Y2xvdWQudWmDomNwkoKheM0BlKF5zNCCoXjNAaKhec0BtqFshKF4zQGloXnNAY+ld2lkdGjM6KZoZWlnaHQioXCXks0BiMy0ks0BkczGks0BmMzZks0BnMzrks0Bu80B
+   * bZLNAZjNAgaSzQF5zQJoumNsb3VkLnN1cHBvcnRVc2VyOmN1c3RvbWVyg6JjcJGCoXjM/aF5zPKhbISheMz8oXnM9KV3aWR0aMyCpmhlaWdodBKhcJSSzQEhzLSSzQEKzNuSzPDNAQiSzNnNATCxY3VzdG9tZXI6Y2xvdWQudWmDoWyEoXjM96F5zQIqpXdpZHRoGaZo
+   * ZWlnaHQSomRw2UZlLDI4OC42MSw2MjUuODQgMjExLjM2LDQ5Mi40NSAyMzMuODcsNTMxLjMxIDI2MC4zNiw1NzcuMDYgMjgzLjQ0LDYxNi45oXCUkszTzQHskszqzQITks0BBM0CQZLNARvNAmk=
+   */
   view customer of customer {
     include
       *,
@@ -70,7 +77,7 @@ views {
       supportUser
 
     style supportUser {
-      color indigo
+      color #f0f
     }
   }
 

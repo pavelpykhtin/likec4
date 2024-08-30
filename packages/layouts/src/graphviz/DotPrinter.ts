@@ -6,7 +6,8 @@ import {
   nameFromFqn,
   nonNullable,
   parentFqn,
-  parentFqnPredicate
+  parentFqnPredicate,
+  elementColorValueProvider
 } from '@likec4/core'
 import type {
   ComputedEdge,
@@ -235,13 +236,13 @@ export abstract class DotPrinter<V extends ComputedView = ComputedView> {
   protected elementToSubgraph(compound: ComputedNode, subgraph: SubgraphModel) {
     invariant(isCompound(compound), 'node should be compound')
     invariant(isNumber(compound.depth), 'node.depth should be defined')
-    const textColor = compoundLabelColor(Theme.elements[compound.color].loContrast)
+    const textColor = compoundLabelColor(elementColorValueProvider(compound.color, 'loContrast'))
     subgraph.apply({
       [_.likec4_id]: compound.id,
       [_.likec4_level]: compound.level,
       [_.likec4_depth]: compound.depth,
-      [_.fillcolor]: compoundColor(Theme.elements[compound.color].fill, compound.depth),
-      [_.color]: compoundColor(Theme.elements[compound.color].stroke, compound.depth),
+      [_.fillcolor]: compoundColor(elementColorValueProvider(compound.color, 'fill'), compound.depth),
+      [_.color]: compoundColor(elementColorValueProvider(compound.color, 'stroke'), compound.depth),
       [_.style]: 'filled',
       [_.margin]: pxToPoints(32),
       [_.label]: compoundLabel(compound, textColor)
@@ -255,9 +256,9 @@ export abstract class DotPrinter<V extends ComputedView = ComputedView> {
     node.attributes.apply({
       [_.likec4_id]: element.id,
       [_.likec4_level]: element.level,
-      [_.fillcolor]: Theme.elements[element.color].fill,
-      [_.fontcolor]: Theme.elements[element.color].hiContrast,
-      [_.color]: Theme.elements[element.color].stroke,
+      [_.fillcolor]: elementColorValueProvider(element.color, 'fill'),
+      [_.fontcolor]: elementColorValueProvider(element.color, 'hiContrast'),
+      [_.color]: elementColorValueProvider(element.color, 'stroke'),
       [_.margin]: `${pxToInch(hasIcon ? 10 : 26)},${pxToInch(26)}`
     })
     switch (element.shape) {

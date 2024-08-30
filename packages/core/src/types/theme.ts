@@ -1,4 +1,7 @@
-export type ThemeColor =
+
+export type Color = ThemeColor | HexColorLiteral
+
+  export type ThemeColor =
   | 'amber'
   | 'blue'
   | 'gray'

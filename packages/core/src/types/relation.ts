@@ -1,7 +1,7 @@
 import type { NonEmptyArray } from './_common'
 import type { Fqn, Link, Tag } from './element'
 import type { Opaque } from './opaque'
-import type { ThemeColor } from './theme'
+import type { Color, ThemeColor } from './theme'
 
 export type RelationID = Opaque<string, 'RelationID'>
 export type RelationshipKind = Opaque<string, 'RelationshipKind'>
@@ -34,7 +34,7 @@ export interface Relation {
   readonly technology?: string
   readonly tags?: NonEmptyArray<Tag>
   readonly kind?: RelationshipKind
-  readonly color?: ThemeColor
+  readonly color?: Color
   readonly line?: RelationshipLineType
   readonly head?: RelationshipArrowType
   readonly tail?: RelationshipArrowType

@@ -1,10 +1,10 @@
-import type { DiagramNode } from '@likec4/core/types'
+import type { Color, DiagramNode, ElementThemeColors, ElementThemeColorValues, HexColorLiteral } from '@likec4/core/types'
 import { ActionIcon, Text as MantineText, Tooltip } from '@mantine/core'
 import { IconFileSymlink } from '@tabler/icons-react'
 import { Handle, type NodeProps, NodeToolbar, Position } from '@xyflow/react'
 import clsx from 'clsx'
 import { deepEqual as eq } from 'fast-equals'
-import { m, type Variants } from 'framer-motion'
+import { m, type MotionStyle, type Variants } from 'framer-motion'
 import { memo } from 'react'
 import { isNumber, isTruthy } from 'remeda'
 import { type DiagramStoreApi, useDiagramState, useDiagramStoreApi } from '../../../hooks/useDiagramState'
@@ -14,6 +14,9 @@ import { NavigateToBtn } from '../shared/NavigateToBtn'
 import * as css from './element.css'
 import { ElementLink } from './ElementLink'
 import { ElementShapeSvg, SelectedIndicator } from './ElementShapeSvg'
+import { vars } from '../../../theme.css'
+import { elementCustomPaletteProvider } from '../../../../../core/src/colors/element'
+import {rootLogger} from '@likec4/log'
 
 const Text = MantineText.withProps({
   component: 'div'
@@ -77,6 +80,20 @@ const isEqualProps = (prev: ElementNodeProps, next: ElementNodeProps) => (
   && eq(prev.height ?? 0, next.height ?? 0)
   && eq(prev.data.element, next.data.element)
 )
+
+const logger = rootLogger.withTag('elementNode');
+
+function buildVarOverrideStyle(elementTheme: ElementThemeColorValues): MotionStyle {
+  const result: {[key: string]: Color} = {};
+
+  let key: keyof ElementThemeColorValues;
+  for (key in elementTheme) {
+    result[vars.element[key]] = elementTheme[key];
+  }
+  logger.debug(result);
+
+  return result;
+}
 
 export const ElementNodeMemo = memo<ElementNodeProps>(function ElementNode({
   id,
@@ -142,6 +159,10 @@ export const ElementNodeMemo = memo<ElementNodeProps>(function ElementNode({
         variants={variants}
         initial={false}
         animate={animate}
+        style={{
+          ...(!element.color.startsWith('#') ? {} : buildVarOverrideStyle(elementCustomPaletteProvider(element.color as HexColorLiteral))),
+          width: '500px'
+        }}
         {...(isInteractive && {
           whileTap: dragging ? animate : 'tap'
         })}

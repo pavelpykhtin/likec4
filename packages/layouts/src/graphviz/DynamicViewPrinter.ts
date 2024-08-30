@@ -1,5 +1,5 @@
 import type { ComputedDynamicView, ComputedEdge } from '@likec4/core'
-import { DefaultArrowType, DefaultRelationshipColor, defaultTheme as Theme, extractStep } from '@likec4/core'
+import { DefaultArrowType, DefaultRelationshipColor, defaultTheme as Theme, extractStep, relationshipColorValueProvider as colorValueProvider } from '@likec4/core'
 import { difference, first, intersection, isNonNullish, last, unique } from 'remeda'
 import type { EdgeModel, RootGraphModel } from 'ts-graphviz'
 import { attribute as _ } from 'ts-graphviz'
@@ -35,8 +35,8 @@ export class DynamicViewPrinter extends DotPrinter<ComputedDynamicView> {
 
     if (edge.color && edge.color !== DefaultRelationshipColor) {
       e.attributes.apply({
-        [_.color]: Theme.relationships[edge.color].lineColor,
-        [_.fontcolor]: Theme.relationships[edge.color].labelColor
+        [_.color]: colorValueProvider(edge.color, 'lineColor'),
+        [_.fontcolor]: colorValueProvider(edge.color, 'labelColor')
       })
     }
 

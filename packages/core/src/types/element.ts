@@ -1,6 +1,6 @@
 import type { IconUrl, NonEmptyArray } from './_common'
 import type { Opaque } from './opaque'
-import type { ThemeColor } from './theme'
+import type { Color, ThemeColor } from './theme'
 
 // Full-qualified-name
 export type Fqn = Opaque<string, 'Fqn'>
@@ -56,7 +56,7 @@ export interface Element {
   readonly links: NonEmptyArray<Link> | null
   readonly icon?: IconUrl
   readonly shape?: ElementShape
-  readonly color?: ThemeColor
+  readonly color?: Color
   readonly style?: ElementStyle
   readonly notation?: string
   readonly metadata?: { [key: string]: string }

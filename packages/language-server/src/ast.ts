@@ -37,7 +37,7 @@ declare module './generated/ast' {
 type ParsedElementStyle = {
   shape?: c4.ElementShape
   icon?: c4.IconUrl
-  color?: c4.ThemeColor
+  color?: c4.Color
   border?: c4.BorderStyle
   opacity?: number
 }
@@ -53,7 +53,7 @@ export interface ParsedAstSpecification {
     {
       technology?: string
       notation?: string
-      color?: c4.ThemeColor
+      color?: c4.Color
       line?: c4.RelationshipLineType
       head?: c4.RelationshipArrowType
       tail?: c4.RelationshipArrowType
@@ -84,7 +84,7 @@ export interface ParsedAstRelation {
   title: string
   description?: string
   technology?: string
-  color?: c4.ThemeColor
+  color?: c4.Color
   line?: c4.RelationshipLineType
   head?: c4.RelationshipArrowType
   tail?: c4.RelationshipArrowType
@@ -359,7 +359,7 @@ export function toElementStyle(props?: Array<ast.StyleProperty>) {
       }
       case ast.isColorProperty(prop): {
         if (isTruthy(prop.value)) {
-          result.color = prop.value
+          result.color = prop.value as c4.Color
         }
         break
       }
@@ -390,7 +390,7 @@ export function toElementStyle(props?: Array<ast.StyleProperty>) {
 
 export function toRelationshipStyle(props?: ast.RelationshipStyleProperty[]) {
   const result = {} as {
-    color?: c4.ThemeColor
+    color?: c4.Color
     line?: c4.RelationshipLineType
     head?: c4.RelationshipArrowType
     tail?: c4.RelationshipArrowType
@@ -400,7 +400,7 @@ export function toRelationshipStyle(props?: ast.RelationshipStyleProperty[]) {
   }
   for (const prop of props) {
     if (ast.isColorProperty(prop)) {
-      result.color = prop.value
+      result.color = prop.value as c4.Color
       continue
     }
     if (ast.isLineProperty(prop)) {
